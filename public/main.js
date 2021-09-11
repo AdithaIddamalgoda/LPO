@@ -72,18 +72,29 @@ function configureDropDownLists(inputProvince, inputDistrict) {
   
   }
   
-  function createOption(ddl, text, value) {
+function createOption(ddl, text, value) {
     var opt = document.createElement('option');
     opt.value = value;
     opt.text = text;
     ddl.options.add(opt);
-  }
+}
 
-  function initMap() {
-      var location = {lat: 6.9262680158433385, lng:79.86015314129502};
-      var map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4, 
-          center: location
-      });
-  }
+function initMap() {
+    var location = {lat: 6.9262680158433385, lng:79.86015314129502};
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10, 
+        center: location
+    });
+}
 
+var geocoder = new google.maps.Geocoder();
+var address = user.Address1;
+console.log(address)
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+if (status == google.maps.GeocoderStatus.OK) {
+    var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+    location = (latitude+', '+longitude);
+    } 
+}); 

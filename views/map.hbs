@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html>
   <head>
     <title>Locator</title>
@@ -440,5 +440,33 @@
       <div id="map"></div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap&libraries=places,geometry&channel=GMPSB_locatorplus_v4_cA" async defer></script>
+  </body>
+</html> --}}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+
+      #map{
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+  <script>
+    function initMap() {
+      var location = {lat: 6.9262680158433385, lng:79.86015314129502};
+      var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10, 
+        center: location
+      });
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap"></script>
   </body>
 </html>
