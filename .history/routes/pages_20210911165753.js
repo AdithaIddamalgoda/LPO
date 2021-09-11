@@ -37,10 +37,4 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-router.get('/map', (req, res) => {
-  // console.log("inside");
-  res.render('map');
-});
-
-
 module.exports = router;

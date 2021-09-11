@@ -1,3 +1,5 @@
 Username: test
 email: adithaiddamalgoda@yahoo.com
 password:12345
+
+map api key: AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw
