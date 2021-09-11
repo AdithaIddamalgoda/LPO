@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.set('view engine', 'hbs');
 
-const publicDirectoryPath = path.join(__dirname, "./public");
+const publicDirectoryPath = path.join(__dirname, "../public");
 console.log(publicDirectoryPath)
 app.use(express.static(publicDirectoryPath));
 
