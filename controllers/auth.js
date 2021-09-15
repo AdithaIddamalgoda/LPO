@@ -149,3 +149,26 @@ exports.logout = (req, res) => {
   });
   res.status(200).redirect("/");
 };
+
+
+exports.changestatus = (req, res) => {
+  
+  
+  
+  console.log(req.body);
+
+  // const userID = req.body.userID;
+  // req.user = req.user;
+  const id = jwt.id;
+  const covidStatusChange = req.body.covidStatusChange;
+  const statusChangeDesc = req.body.statusChangeDesc;
+
+  db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id}, (error, result) => {
+    if(error) {
+      console.log(error)
+    }
+  }); 
+  console.log("hi"+jwt)
+  res.send("Form Submitted");
+
+};

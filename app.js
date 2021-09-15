@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+// const fileUpload = require('express-fileUpload');
 
 dotenv.config({ path: './.env' });
 const db = require('./model/db');
@@ -12,6 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(cookieParser());
+
+// app.use(fileUpload());
 
 app.set('view engine', 'hbs');
 

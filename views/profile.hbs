@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>LPO</title>
 </head>
 <body>
@@ -19,29 +20,62 @@
   {{!-- <div class="container mt-4">
     <h1>Welcome {{user.FirstName}}</h1>
   </div> --}}
-  <div class="wrapper">
-    <div class="sidebar">
-      <h2>Sidebar
-        <ul>
-          <li><a href="#"></a>Create Request</li>
-          <li><a href="#"></a>Pending Requests</li>
-          <li><a href="#"></a>Profile Info</li>
-          <li><a href="#"></a>Approved Requests</li>
-          <li><a href="#"></a>Generate Barcode</li>
-        </ul>
-      </h2>
-    </div>
-  </div>
-  <div class="main_content">
-    <div class="header">Welcome
-        <div class="info">
-          <div>Lorem</div>
-        </div>
-    </div>
-  </div>
-  <div id="map"></div>
 
+  
+   <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+        <a href="#" class="navbar-brand text-light mt-5">
+            <div class="display-5 font-weight-bold" id="welcome_message">{{user.FirstName}}</div>
+        </a>
+        <ul class="navbar-nav d-flex flex-column mt-5 w-100">
+            <li class="nav-item w-100">
+                <a href="/changestatus" class="nav-link text-light pl-4">Change Status</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="#" class="nav-link text-light pl-4">Manage Status Requests</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="#" class="nav-link text-light pl-4">Create Permission</a>
+            </li>
+            <li class="nav-item dropdown w-100">
+                <a href="#" class="nav-link dropdown-toggle text-light pl-4" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">Service</a>
+                <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
+                    <li><a href="#" class="dropdown-item text-light pl-4 p-2">Service 01</a></li>
+                    <li><a href="#" class="dropdown-item text-light pl-4 p-2">Service 02</a></li>
+                    <li><a href="#" class="dropdown-item text-light pl-4 p-2">Service 03</a></li>
+                </ul>
+            </li>
+            <li class="nav-item w-100">
+                <a href="#" class="nav-link text-light pl-4">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    <section class="p-4 my-container">
+        <button class="btn my-4" id="menu-btn"><i class="fa fa-bars"></i></button>
+        <h1>Bootstrap 5 Sidebar Navigation</h1>
+        <div id="map"></div>
+        {{!-- <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam facilis inventore harum, architecto libero recusandae porro doloremque sunt cum consectetur, autem, vitae ea nihil sapiente voluptas at aut suscipit eos? Sapiente quam culpa aliquam --}}
+    </section>
+    {{!-- <h1 id="username" onload="changeUserName()">{{user.FirstName}}</h1> --}}
+    <button id="username" onclick="changeUserName()">{{user.FirstName}}</button>
+h={{user.id}}
+
+
+    
+<!-- custom js -->
+<script>
+    var menu_btn = document.querySelector("#menu-btn")
+    var sidebar = document.querySelector("#sidebar")
+    var container = document.querySelector(".my-container")
+    menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav")
+        container.classList.toggle("active-cont")
+    })
+</script>
 <script src = "/main.js"></script>
+<!-- bootstrap js -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> --}}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>

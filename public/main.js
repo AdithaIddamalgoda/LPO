@@ -98,3 +98,22 @@ if (status == google.maps.GeocoderStatus.OK) {
     location = (latitude+', '+longitude);
     } 
 }); 
+
+// Side Navbar
+
+
+
+//Textbox count
+$('textarea').keyup(function() {    
+  var characterCount = $(this).val().length,
+      current_count = $('#current_count'),
+      maximum_count = $('#maximum_count'),
+      count = $('#count');    
+      current_count.text(characterCount);        
+});
+
+
+function changeUserName(){
+  let a = document.getElementById("username")
+  a.innerText = a.innerText +"ass"        
+}

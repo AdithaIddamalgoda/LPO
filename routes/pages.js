@@ -37,9 +37,17 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-router.get('/map', (req, res) => {
-  // console.log("inside");
-  res.render('map');
+router.get('/map', authController.isLoggedIn, (req, res) => {
+  console.log("map");
+  res.render('map', {
+    user: req.user
+  });
+});
+
+router.get('/changestatus', authController.isLoggedIn, (req, res) => {
+  res.render('changestatus', {
+    user: req.user
+  });
 });
 
 
