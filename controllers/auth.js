@@ -172,3 +172,36 @@ exports.changestatus = (req, res) => {
   res.send("Form Submitted");
 
 };
+
+exports.isLogged = async (req, res, next) => {
+  console.log(req.cookies);
+  if (req.cookies.jwt) {
+    try {
+      // 1) verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      console.log("decoded");
+      console.log(decoded);
+
+      // 2) Check if user still exists
+      db.start.query('SELECT * FROM phirequests WHERE userID = ?', [decoded.id], (error, result) => {
+        // console.log(result)
+        if(!result) {
+          return next();
+        }
+        // THERE IS A LOGGED IN USER
+        req.phireq = result[0];
+        // res.locals.user = result[0];
+        console.log("next")
+        return next();
+      });
+    } catch (err) {
+      return next();
+    }
+  } else {
+    next();
+  }
+};

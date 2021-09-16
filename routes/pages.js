@@ -37,16 +37,18 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-router.get('/map', authController.isLoggedIn, (req, res) => {
+router.get('/map', authController.isLoggedIn, authController.isLogged, (req, res) => {
   console.log("map");
   res.render('map', {
-    user: req.user
+    user: req.user,
+    phireq: req.phireq
   });
 });
 
-router.get('/changestatus', authController.isLoggedIn, (req, res) => {
+router.get('/changestatus', authController.isLoggedIn, authController.isLogged, (req, res) => {
   res.render('changestatus', {
-    user: req.user
+    user: req.user,
+    phireq: req.phireq,
   });
 });
 
