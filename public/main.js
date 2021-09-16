@@ -87,30 +87,11 @@ function initMap() {
     });
 }
 
-var geocoder = new google.maps.Geocoder();
-var address = user.Address1;
-console.log(address)
-geocoder.geocode( { 'address': address}, function(results, status) {
-
-if (status == google.maps.GeocoderStatus.OK) {
-    var latitude = results[0].geometry.location.lat();
-    var longitude = results[0].geometry.location.lng();
-    location = (latitude+', '+longitude);
-    } 
-}); 
 
 // Side Navbar
 
 
 
-//Textbox count
-$('textarea').keyup(function() {    
-  var characterCount = $(this).val().length,
-      current_count = $('#current_count'),
-      maximum_count = $('#maximum_count'),
-      count = $('#count');    
-      current_count.text(characterCount);        
-});
 
 
 function changeUserName(){

@@ -167,9 +167,11 @@ exports.changestatus = (req, res) => {
     if(error) {
       console.log(error)
     }
+    else{
+      console.log("hi"+jwt)
+      res.send("Form Submitted");    
+    }
   }); 
-  console.log("hi"+jwt)
-  res.send("Form Submitted");
 
 };
 
