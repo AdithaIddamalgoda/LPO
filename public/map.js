@@ -8,6 +8,30 @@ function initMap() {
   infoWindow = new google.maps.InfoWindow();
   
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        map.setCenter(pos)
+        const marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+        });
+
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+
+
   const locationButton = document.createElement("button");
 
   locationButton.textContent = "Pan to Current Location";
