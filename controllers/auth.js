@@ -159,7 +159,7 @@ exports.changestatus = (req, res) => {
 
   // const userID = req.body.userID;
   // req.user = req.user;
-  const id = jwt.id;
+  const id = req.body.userID;
   const covidStatusChange = req.body.covidStatusChange;
   const statusChangeDesc = req.body.statusChangeDesc;
 
