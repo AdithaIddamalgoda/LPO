@@ -42,8 +42,18 @@ exports.login = async (req, res) => {
         httpOnly: true
       };
       res.cookie('jwt', token, cookieOptions);
-
-      res.status(200).redirect("/");
+      if (results[0].roleID == 1) {
+        res.status(200).redirect("/");
+      }
+      if (results[0].roleID == 2) {
+        res.status(200).redirect("/map");
+      }
+      if (results[0].roleID == 3) {
+        res.status(200).redirect("/");
+      }
+      if (results[0].roleID == 4) {
+        res.status(200).redirect("/");
+      }
     }
   });
 };
@@ -156,10 +166,14 @@ exports.changestatus = (req, res) => {
   
   
   console.log(req.body);
+  const decoded = (jwt.verify)(
+    req.cookies.jwt,
+    process.env.JWT_SECRET
+  );
 
   // const userID = req.body.userID;
   // req.user = req.user;
-  const id = req.body.userID;
+  const id = decoded.id;
   const covidStatusChange = req.body.covidStatusChange;
   const statusChangeDesc = req.body.statusChangeDesc;
 
