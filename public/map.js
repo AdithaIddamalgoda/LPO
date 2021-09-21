@@ -1,4 +1,7 @@
 let map, infoWindow;
+let locID = "";
+let marker;
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -7,7 +10,13 @@ function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
   
+    marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+  });
 
+
+  //if (!database eke location thiyenawanan )
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -15,12 +24,10 @@ function initMap() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        map.setCenter(pos)
-        const marker = new google.maps.Marker({
-          position: pos,
-          map: map,
-        });
-
+        locID = position.coords.longitude + " " + position.coords.latitude
+        console.log(locID)
+        marker.setPosition(pos);
+        map.setCenter(pos);
       },
       () => {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -31,7 +38,7 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 
-
+  
   const locationButton = document.createElement("button");
 
   locationButton.textContent = "Pan to Current Location";
@@ -47,10 +54,11 @@ function initMap() {
             lng: position.coords.longitude,
           };
           map.setCenter(pos)
-          const marker = new google.maps.Marker({
-            position: pos,
-            map: map,
-          });
+          marker.setPosition(pos);
+          // const marker = new google.maps.Marker({
+          //   position: pos,
+          //   map: map,
+          // });
  
         },
         () => {
@@ -72,4 +80,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
+}
+
+function confirmLocation(id) {
+  let newLoc = marker.getPosition().lat() + " " + marker.getPosition().lng()
+  console.log(newLoc)
+  console.log(id)
 }

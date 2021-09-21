@@ -52,5 +52,14 @@ router.get('/changestatus', authController.isLoggedIn, authController.isLogged, 
   });
 });
 
+router.get('/newmap', (req, res) => {
+  res.render('newmap');
+});
+
+
+router.get('/phiHome', (req, res) => {
+  res.render('./PHI/phi-home');
+});
+
 
 module.exports = router;
