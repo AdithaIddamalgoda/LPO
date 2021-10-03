@@ -209,7 +209,7 @@ exports.isLogged = async (req, res, next) => {
           return next();
         }
         // THERE IS A LOGGED IN USER
-        req.phireq = result[0];
+        req.phireq = result[result.length - 1];
         // res.locals.user = result[0];
         console.log("next")
         return next();

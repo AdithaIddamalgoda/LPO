@@ -13,9 +13,11 @@
   <body>
   <div id="map"></div>
   <button id="confirmLocation" onclick="confirmLocation({{user.id}})">confirm location</button>
+  <p id="current"></p>
   <script src="map.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap"></script>
   hi{{user.FirstName}}
+  userid{{user.id}}
   hi{{phireq.status}}
   </body>
 </html>
