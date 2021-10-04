@@ -57,8 +57,12 @@ router.get('/newmap', (req, res) => {
 });
 
 
-router.get('/phiHome', (req, res) => {
-  res.render('./PHI/phi-home');
+router.get('/phiHome', authController.isLoggedIn, authController.isLogged, authController.phiView, (req, res) => {
+  res.render('./PHI/phi-home', {
+    user: req.user,
+    phireq: req.phireq,
+    phiView: req.phiView,
+  });
 });
 
 

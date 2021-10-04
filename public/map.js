@@ -87,10 +87,26 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
-}''
+}
 
 function confirmLocation(id) {
   let newLoc = marker.getPosition().lat() + " " + marker.getPosition().lng()
   console.log(newLoc)
   console.log(id)
+  axios({
+    url: '/auth/confirm-location',
+    method: 'post',
+    data: {
+        lat: marker.getPosition().lat(),
+        lng: marker.getPosition().lng()
+    }
+}).then(response => {
+    if (response) {
+        console.log("hut", response.data)
+
+    }
+})
+.catch(error => {
+    console.log(error)
+})
 }

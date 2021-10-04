@@ -12,10 +12,14 @@
   </head>
   <body>
   <div id="map"></div>
-  <button id="confirmLocation" onclick="confirmLocation({{user.id}})">confirm location</button>
-  <p id="current"></p>
+  {{!-- <form action="/confirm-location"> 
+  <input id="lat">{{marker}}</input> --}}
+  <button id="confirmLocation" onclick="confirmLocation({{user.id}})" type="submit">confirm location</button>
+  {{!-- </form> --}}
+  <p id="current">Your location here</p>
   <script src="map.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   hi{{user.FirstName}}
   userid{{user.id}}
   hi{{phireq.status}}

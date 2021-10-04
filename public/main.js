@@ -79,13 +79,13 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function initMap() {
-    var location = {lat: 6.9262680158433385, lng:79.86015314129502};
-    var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 10, 
-        center: location
-    });
-}
+// function initMap() {
+//     var location = {lat: 6.9262680158433385, lng:79.86015314129502};
+//     var map = new google.maps.Map(document.getElementById("map"), {
+//         zoom: 10, 
+//         center: location
+//     });
+// }
 
 
 // Side Navbar
@@ -96,5 +96,5 @@ function initMap() {
 
 function changeUserName(){
   let a = document.getElementById("username")
-  a.innerText = a.innerText +"ass"        
+  a.innerText = a.innerText +"as"        
 }

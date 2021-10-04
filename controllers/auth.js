@@ -17,13 +17,14 @@ exports.login = async (req, res) => {
     });
   }
 
+
   // 2) Check if user exists && password is correct
   db.start.query('SELECT * FROM users WHERE Email = ?', [email], async (error, results) => {
     console.log(results);
     console.log(password);
     const isMatch = await bcrypt.compare(password, results[0].Password);
     console.log(isMatch);
-    if(!results || !isMatch ) {
+    if (!results || !isMatch) {
       return res.status(401).render("login", {
         message: 'Incorrect Email or password'
       });
@@ -75,25 +76,25 @@ exports.register = (req, res) => {
 
   // 2) Check if user exists && password is correct
   db.start.query('SELECT Email FROM users WHERE Email = ?', [email], async (error, results) => {
-    if(error) {
+    if (error) {
       console.log(error)
     }
 
-    if(results.length > 0 ) {
+    if (results.length > 0) {
       return res.render('register', {
-                message: 'That Email has been taken'
-              });
-    } else if(password !== confirmPassword) {
+        message: 'That Email has been taken'
+      });
+    } else if (password !== confirmPassword) {
       return res.render('register', {
         message: 'Passwords do not match'
       });
     }
-      
+
     let hashedPassword = await bcrypt.hash(password, 8);
     console.log(hashedPassword);
 
     db.start.query('INSERT INTO users SET ?', { FirstName: fname, LastName: lname, Email: email, Password: hashedPassword, Address1: address1, Address2: address2, City: city, District: district, Province: province, Zip: zip, NicNo: nic }, (error, result) => {
-      if(error) {
+      if (error) {
         console.log(error)
       } else {
         db.start.query('SELECT id FROM users WHERE Email = ?', [email], (error, result) => {
@@ -135,7 +136,7 @@ exports.isLoggedIn = async (req, res, next) => {
       // 2) Check if user still exists
       db.start.query('SELECT * FROM users WHERE id = ?', [decoded.id], (error, result) => {
         console.log(result)
-        if(!result) {
+        if (!result) {
           return next();
         }
         // THERE IS A LOGGED IN USER
@@ -162,9 +163,9 @@ exports.logout = (req, res) => {
 
 
 exports.changestatus = (req, res) => {
-  
-  
-  
+
+
+
   console.log(req.body);
   const decoded = (jwt.verify)(
     req.cookies.jwt,
@@ -177,15 +178,15 @@ exports.changestatus = (req, res) => {
   const covidStatusChange = req.body.covidStatusChange;
   const statusChangeDesc = req.body.statusChangeDesc;
 
-  db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id}, (error, result) => {
-    if(error) {
+  db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id }, (error, result) => {
+    if (error) {
       console.log(error)
     }
-    else{
-      console.log("hi"+jwt)
-      res.send("Form Submitted");    
+    else {
+      console.log("hi" + jwt)
+      res.send("Form Submitted");
     }
-  }); 
+  });
 
 };
 
@@ -202,14 +203,85 @@ exports.isLogged = async (req, res, next) => {
       console.log("decoded");
       console.log(decoded);
 
-      // 2) Check if user still exists
       db.start.query('SELECT * FROM phirequests WHERE userID = ?', [decoded.id], (error, result) => {
         // console.log(result)
-        if(!result) {
+        if (!result) {
           return next();
         }
         // THERE IS A LOGGED IN USER
         req.phireq = result[result.length - 1];
+        // res.locals.user = result[0];
+        console.log("next")
+        return next();
+      });
+    } catch (err) {
+      return next();
+    }
+  } else {
+    next();
+  }
+};
+
+exports.confirmLocation = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    console.log("inxxxxx")
+
+    try {
+      // 1) verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      console.log("decoded");
+      console.log(decoded);
+
+
+      db.start.query('UPDATE users SET location = POINT(?, ?) WHERE id = ?', [req.body.lng, req.body.lat, decoded.id], (error, result) => {
+        // console.log(result)
+        if (!result) {
+          res.status(200);
+          res.json({ working: "error:\n"+error });
+          res.end();
+
+        }
+      });
+    } catch (err) {
+      res.status(200);
+      res.json({ working: err });
+      res.end();
+    }
+  } else {
+    res.status(400);
+    res.json({ working: "methana" });
+    res.end();
+  }
+};
+
+
+
+//phi home page
+exports.phiView = async (req, res, next) => {
+  console.log(req.cookies);
+  if (req.cookies.jwt) {
+    try {
+      // 1) verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      console.log("decoded");
+      console.log(decoded);
+
+      // 2) spatial query
+      db.start.query('SELECT us.*, ph.* FROM users us INNER JOIN phirequests ph ON us.id = ph.userID, admin_boundary ab WHERE ST_Intersects(ab.WKT, us.location)', [decoded.id], (error, result) => {
+        console.log(result)
+        if (!result) {
+          return next();
+        }
+        // THERE IS A LOGGED IN USER
+        req.phiView = result;
         // res.locals.user = result[0];
         console.log("next")
         return next();
