@@ -57,29 +57,46 @@
         <button class="btn my-4" id="menu-btn"><i class="fa fa-bars"></i></button>
         <h1>Bootstrap 5 Sidebar Navigation</h1>
         <li>{{phireq.status}}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each phiView}}
-                <tr>
-                    <th scope="row">1</th>
-                    <td>{{FirstName}}</td>
-                    <td>{{Email}}</td>
-                    <td>{{status}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-        <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam facilis inventore harum,
-            architecto libero recusandae porro doloremque sunt cum consectetur, autem, vitae ea nihil sapiente voluptas
-            at aut suscipit eos? Sapiente quam culpa aliquam
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Current status</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each phiView}}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{{FirstName}} {{LastName}}</td>
+                        <td>{{Email}}</td>
+                        <td>{{status}}</td>
+                        <td>
+                            {{#if covidRequestStatus}}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" onclick="changeStatus()" type="checkbox" role="switch"
+                                   value=1 id="flexSwitchCheckChecked" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                            </div>
+                            {{else}}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                            </div>
+                            {{/if}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam facilis inventore harum,
+                architecto libero recusandae porro doloremque sunt cum consectetur, autem, vitae ea nihil sapiente
+                voluptas
+                at aut suscipit eos? Sapiente quam culpa aliquam
     </section>
     {{!-- <h1 id="username" onload="changeUserName()">{{user.FirstName}}</h1> --}}
     <button id="username" onclick="changeUserName()">{{user.FirstName}}</button>
@@ -100,6 +117,7 @@
     </script>
     <script src="/main.js"></script>
     <script src="/phi-home.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- bootstrap js -->
     {{!--
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"

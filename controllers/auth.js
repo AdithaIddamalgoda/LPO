@@ -3,6 +3,14 @@ const db = require('../model/db');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 
+const getPhiID = async (userID) => {
+  return new Promise((resolve) => {
+    db.start.query('SELECT * FROM users us, phitable pht  WHERE us.id = pht.userID AND us.id=?', [userID], async (phierror, phiresults) => {
+      resolve(phiresults[0].phiID);
+    })
+  });
+}
+
 
 // exports.login = async (req, res, next) => {
 exports.login = async (req, res) => {
@@ -31,11 +39,17 @@ exports.login = async (req, res) => {
     } else {
       // 3) If everything ok, send token to client
       const id = results[0].id;
+      const tokenBody =  {
+        id: results[0].id,  
+      };
+      if (results[0].roleID == 2) {
+        tokenBody["phiID"] = await getPhiID(results[0].id);
+    }
       console.log(id);
-      const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN
+      const token = jwt.sign(tokenBody, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,  
       });
-
+      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", tokenBody)
       const cookieOptions = {
         expires: new Date(
           Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
@@ -47,7 +61,7 @@ exports.login = async (req, res) => {
         res.status(200).redirect("/");
       }
       if (results[0].roleID == 2) {
-        res.status(200).redirect("/map");
+        res.status(200).redirect("/phiHome");
       }
       if (results[0].roleID == 3) {
         res.status(200).redirect("/");
@@ -275,7 +289,7 @@ exports.phiView = async (req, res, next) => {
       console.log(decoded);
 
       // 2) spatial query
-      db.start.query('SELECT us.*, ph.* FROM users us INNER JOIN phirequests ph ON us.id = ph.userID, admin_boundary ab WHERE ST_Intersects(ab.WKT, us.location)', [decoded.id], (error, result) => {
+      db.start.query('SELECT us.*, phr.*, ab.ADM4_PCODE, pht.phiID FROM users us INNER JOIN phirequests phr ON us.id = phr.userID, admin_boundary ab INNER JOIN phitable pht ON pht.adminBoundaryID = ab.ADM4_PCODE WHERE ST_Intersects(us.location, ab.WKT) AND pht.phiID = ?', [decoded.phiID], (error, result) => {
         console.log(result)
         if (!result) {
           return next();
