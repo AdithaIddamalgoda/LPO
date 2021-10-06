@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title></title>
-    <style>
 
-      #map{
-        height: 500px;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body>
+<head>
+  <title></title>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <div id="map"></div>
-  {{!-- <form action="/confirm-location"> 
-  <input id="lat">{{marker}}</input> --}}
-  <button id="confirmLocation" onclick="confirmLocation({{user.id}})" type="submit">confirm location</button>
-  {{!-- </form> --}}
+  {{!-- <form action="/confirm-location">
+    <input id="lat">{{marker}}</input> --}}
+    <button id="confirmLocation" onclick="confirmLocation({{user.id}})">confirm location</button>
+    <button id="log db location" onload="logDatabaseLocation({{user.id}})">log location</button>
+    <p type="hidden" id="locationX" >{{user.location.x}}</p>
+    <p type="hidden" id="locationY" >{{user.location.y}}</p>
+    {{!--
+  </form> --}}
   <p id="current">Your location here</p>
   <script src="map.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAl5UNc0smMGx2OjZkwcnuiScEkihNwcw&callback=initMap"></script>
   hi{{user.FirstName}}
   userid{{user.id}}
   hi{{phireq.status}}
-  </body>
+</body>
 </html>

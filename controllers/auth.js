@@ -4,10 +4,21 @@ const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 
 const getPhiID = async (userID) => {
-  return new Promise((resolve) => {
-    db.start.query('SELECT * FROM users us, phitable pht  WHERE us.id = pht.userID AND us.id=?', [userID], async (phierror, phiresults) => {
-      resolve(phiresults[0].phiID);
-    })
+  return new Promise((resolve, reject) => {
+    try {
+      db.start.query('SELECT * FROM users us, phitable pht  WHERE us.id = pht.userID AND us.id=?', [userID], async (phierror, phiresults) => {
+        if (phiresults.length === 0) {
+          reject()
+        }
+        else{
+          resolve(phiresults[0].phiID);
+        }
+      })
+    }
+    catch(err) {
+      console.log(err);
+      reject("reject phi error");
+    }
   });
 }
 
@@ -43,7 +54,13 @@ exports.login = async (req, res) => {
         id: results[0].id,  
       };
       if (results[0].roleID == 2) {
-        tokenBody["phiID"] = await getPhiID(results[0].id);
+        try {
+          tokenBody["phiID"] = await getPhiID(results[0].id);
+        }
+        catch (err) {
+          res.status(400).redirect("/login");
+          console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",err);
+        }
     }
       console.log(id);
       const token = jwt.sign(tokenBody, process.env.JWT_SECRET, {
@@ -290,13 +307,12 @@ exports.phiView = async (req, res, next) => {
 
       // 2) spatial query
       db.start.query('SELECT us.*, phr.*, ab.ADM4_PCODE, pht.phiID FROM users us INNER JOIN phirequests phr ON us.id = phr.userID, admin_boundary ab INNER JOIN phitable pht ON pht.adminBoundaryID = ab.ADM4_PCODE WHERE ST_Intersects(us.location, ab.WKT) AND pht.phiID = ?', [decoded.phiID], (error, result) => {
-        console.log(result)
+        console.log(result);
         if (!result) {
           return next();
         }
-        // THERE IS A LOGGED IN USER
+        // Results of users withi the PHI's admin boundary
         req.phiView = result;
-        // res.locals.user = result[0];
         console.log("next")
         return next();
       });
