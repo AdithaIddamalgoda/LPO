@@ -105,6 +105,11 @@ function confirmLocation(id) {
         console.log("hut", response.data)
 
     }
+    else{
+      res.status(200);
+      res.json({ working: true });
+      res.end();
+  }
 })
 .catch(error => {
     console.log(error)

@@ -55,18 +55,23 @@ exports.confirmCovidRequestStatus = async (req, res, next) => {
             console.log("decoded");
             console.log(decoded);
 
-
-            db.start.query('UPDATE phirequests SET covidRequestStatus = ? WHERE id = ?', [req.body.lng, decoded.id], (error, result) => {
+            console.log("phiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", req.body)
+            db.start.query('UPDATE phirequests SET covidRequestStatus = ? WHERE phiReqID = ?', [req.body.status, req.body.id], (error, result) => {
                 // console.log(result)
                 if (!result) {
-                    res.status(200);
-                    res.json({ working: "error:\n" + error });
+                    res.status(400);
+                    res.json({ working: error });
                     res.end();
 
                 }
+                else{
+                    res.status(200);
+                    res.json({ working: true });
+                    res.end();
+                }
             });
         } catch (err) {
-            res.status(200);
+            res.status(400);
             res.json({ working: err });
             res.end();
         }
