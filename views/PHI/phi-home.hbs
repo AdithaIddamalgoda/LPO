@@ -57,41 +57,41 @@
         <button class="btn my-4" id="menu-btn"><i class="fa fa-bars"></i></button>
         <h1>Bootstrap 5 Sidebar Navigation</h1>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">NIC</th>
-                        <th scope="col">Current status</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each phiView}}
-                    <tr>
-                        <th scope="row">{{phiReqID}}</th>
-                        <td>{{FirstName}} {{LastName}}</td>
-                        <td>{{NicNo}}</td>
-                        <td>{{description}}</td>
-                        <td>{{status}}</td>
-                        <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
-                                    onclick="changeStatus({{phiReqID}})" type="checkbox" role="switch"
-                                    value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
-                                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-            <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam facilis inventore harum,
-                architecto libero recusandae porro doloremque sunt cum consectetur, autem, vitae ea nihil sapiente
-                voluptas
-                at aut suscipit eos? Sapiente quam culpa aliquam
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">NIC</th>
+                    <th scope="col">Current status</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each phiView}}
+                <tr onclick="requestHistory({{userID}})" onhover="requestHistory" class="tableHover">
+                    <th scope="row">{{phiReqID}}</th>
+                    <td>{{FirstName}} {{LastName}}</td>
+                    <td>{{NicNo}}</td>
+                    <td>{{description}}</td>
+                    <td>{{status}}</td>
+                    <td>
+                        <div class="form-check form-switch" onclick='event.stopPropagation()'>
+                            <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
+                                onclick="changeStatus({{phiReqID}})" type="checkbox" role="switch"
+                                value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
+                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam facilis inventore harum,
+            architecto libero recusandae porro doloremque sunt cum consectetur, autem, vitae ea nihil sapiente
+            voluptas
+            at aut suscipit eos? Sapiente quam culpa aliquam
     </section>
     {{!-- <h1 id="username" onload="changeUserName()">{{user.FirstName}}</h1> --}}
     <button id="username" onclick="changeUserName()">{{user.FirstName}}</button>

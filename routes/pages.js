@@ -1,5 +1,6 @@
 const express = require('express');
 const authController = require('../controllers/auth');
+const phiController = require('../controllers/phiController');
 
 const router = express.Router();
 
@@ -19,14 +20,14 @@ router.get('/', authController.isLoggedIn, (req, res) => {
 router.get('/profile', authController.isLoggedIn, (req, res) => {
   console.log("inside");
   console.log(req.user);
-  if(req.user) {
+  if (req.user) {
     res.render('profile', {
       user: req.user
     });
   } else {
     res.redirect("/login");
   }
-  
+
 });
 
 router.get('/login', (req, res) => {
@@ -65,5 +66,12 @@ router.get('/phiHome', authController.isLoggedIn, authController.isLogged, authC
   });
 });
 
+router.get('/phiHome/:userID', authController.isLoggedIn, authController.isLogged, phiController.phiUserHistory, (req, res) => {
+  res.render('./PHI/userRequestHistory', {
+    user: req.user,
+    phireq: req.phireq,
+    phiUserHistory: req.phiUserHistory,
+  });
+});
 
 module.exports = router;

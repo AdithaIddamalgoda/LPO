@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>LPO</title>
+</head>
+
+<body>
+    <nav>
+        <h4>Lockdown Permission Organizer</h4>
+        <ul>
+            {{#if user}}
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+            {{else}}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            {{/if}}
+        </ul>
+    </nav>
+    <div class="container mt-4">
+        <div class="bg-light p-5 rounded-lg m-3">
+            <h1 class="display-4">Lockdown Permission Organizer</h1>
+            <p class="lead">Welcome to the first step of receiving your curfew break pass.</p>
+            <hr class="my-4">
+            {{!-- <p>It uses utility classes for typography and spacing to space content out within the larger
+                container.</p> --}}
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">NIC</th>
+                    <th scope="col">Current status</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each phiUserHistory}}
+                <tr onclick="requestHistory({{userID}})" onhover="requestHistory" class="tableHover">
+                    <th scope="row">{{phiReqID}}</th>
+                    <td>{{FirstName}} {{LastName}}</td>
+                    <td>{{NicNo}}</td>
+                    <td>{{description}}</td>
+                    <td>{{status}}</td>
+                    <td>
+                        <div class="form-check form-switch" onclick='event.stopPropagation()'>
+                            <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
+                                onclick="changeStatus({{phiReqID}})" type="checkbox" role="switch"
+                                value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
+                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{user.FirstName}}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

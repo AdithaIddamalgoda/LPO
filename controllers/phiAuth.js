@@ -23,15 +23,19 @@ exports.confirmLocation = async (req, res, next) => {
             db.start.query('UPDATE users SET location = POINT(?, ?) WHERE id = ?', [req.body.lng, req.body.lat, decoded.id], (error, result) => {
                 // console.log(result)
                 if (!result) {
-                    res.status(200);
-                    res.json({ working: "error:\n" + error });
+                    res.status(400);
+                    res.json({
+                        working: "error:\n" + error
+                    });
                     res.end();
 
                 }
             });
         } catch (err) {
             res.status(200);
-            res.json({ working: err });
+            res.json({
+                working: err
+            });
             res.end();
         }
     } else {
@@ -62,9 +66,8 @@ exports.confirmCovidRequestStatus = async (req, res, next) => {
                     res.status(400);
                     res.json({ working: error });
                     res.end();
-
                 }
-                else{
+                else {
                     res.status(200);
                     res.json({ working: true });
                     res.end();

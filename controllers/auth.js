@@ -10,12 +10,12 @@ const getPhiID = async (userID) => {
         if (phiresults.length === 0) {
           reject()
         }
-        else{
+        else {
           resolve(phiresults[0].phiID);
         }
       })
     }
-    catch(err) {
+    catch (err) {
       console.log(err);
       reject("reject phi error");
     }
@@ -50,8 +50,8 @@ exports.login = async (req, res) => {
     } else {
       // 3) If everything ok, send token to client
       const id = results[0].id;
-      const tokenBody =  {
-        id: results[0].id,  
+      const tokenBody = {
+        id: results[0].id,
       };
       if (results[0].roleID == 2) {
         try {
@@ -59,12 +59,12 @@ exports.login = async (req, res) => {
         }
         catch (err) {
           res.status(400).redirect("/login");
-          console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",err);
+          console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", err);
         }
-    }
+      }
       console.log(id);
       const token = jwt.sign(tokenBody, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,  
+        expiresIn: process.env.JWT_EXPIRES_IN,
       });
       console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", tokenBody)
       const cookieOptions = {
@@ -212,10 +212,13 @@ exports.changestatus = (req, res) => {
   db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id }, (error, result) => {
     if (error) {
       console.log(error)
+      res.status(400)
+      return;
     }
     else {
       console.log("hi" + jwt)
-      res.send("Form Submitted");
+      res.status(200).redirect("/changestatus");
+      // res.send("Form Submitted");
     }
   });
 
@@ -272,7 +275,7 @@ exports.confirmLocation = async (req, res, next) => {
         // console.log(result)
         if (!result) {
           res.status(200);
-          res.json({ working: "error:\n"+error });
+          res.json({ working: "error:\n" + error });
           res.end();
 
         }
@@ -306,10 +309,12 @@ exports.phiView = async (req, res, next) => {
       console.log(decoded);
 
       // 2) spatial query
-      db.start.query('SELECT us.*, phr.*, ab.ADM4_PCODE, pht.phiID FROM users us INNER JOIN phirequests phr ON us.id = phr.userID, admin_boundary ab INNER JOIN phitable pht ON pht.adminBoundaryID = ab.ADM4_PCODE WHERE ST_Intersects(us.location, ab.WKT) AND pht.phiID = ?', [decoded.phiID], (error, result) => {
+      db.start.query('SELECT us.*, phr.*, ab.ADM4_PCODE, pht.phiID FROM users us INNER JOIN phirequests phr ON us.id = phr.userID, admin_boundary ab INNER JOIN phitable pht ON pht.adminBoundaryID = ab.ADM4_PCODE WHERE ST_Intersects(us.location, ab.WKT) AND pht.phiID = ? AND phr.phiReqID IN (SELECT MAX(PHR.phiReqID) FROM users us INNER JOIN phirequests phr ON us.id = phr.userID, admin_boundary ab INNER JOIN phitable pht ON pht.adminBoundaryID = ab.ADM4_PCODE WHERE ST_Intersects(us.location, ab.WKT)GROUP by PHR.userID);', [decoded.phiID], (error, result) => {
         console.log(result);
         if (!result) {
           return next();
+        } else {
+          console.log("*************************************************************\n", result)
         }
         // Results of users withi the PHI's admin boundary
         req.phiView = result;
