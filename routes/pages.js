@@ -38,6 +38,11 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
+router.get('/admin-home', authController.isLoggedIn, authController.isLogged, authController.phiView, (req, res) => {
+  res.render('./Admin/admin-home', {
+    user: req.user,
+  });
+});
 router.get('/map', authController.isLoggedIn, authController.isLogged, (req, res) => {
   console.log("map");
   res.render('map', {
@@ -73,5 +78,7 @@ router.get('/phiHome/:userID', authController.isLoggedIn, authController.isLogge
     phiUserHistory: req.phiUserHistory,
   });
 });
+
+router.get('/phi-request/:id', phiController.getPhiReqById) 
 
 module.exports = router;

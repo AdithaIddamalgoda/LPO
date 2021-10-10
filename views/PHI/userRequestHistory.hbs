@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>LPO</title>
 </head>
 
@@ -16,7 +18,7 @@
         <h4>Lockdown Permission Organizer</h4>
         <ul>
             {{#if user}}
-            <li><a href="/profile">Profile</a></li>
+            <li><a href="/phiHome">Profile</a></li>
             <li><a href="/auth/logout">Logout</a></li>
             {{else}}
             <li><a href="/login">Login</a></li>
@@ -38,27 +40,30 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">NIC</th>
                     <th scope="col">Current status</th>
                     <th scope="col">Description</th>
                     <th scope="col">Status</th>
+                    <th class="text-center" scope="col">View Details</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each phiUserHistory}}
-                <tr onclick="requestHistory({{userID}})" onhover="requestHistory" class="tableHover">
+                <tr onclick="modalPopup({{userID}})" onhover="requestHistory" class="tableHover">
                     <th scope="row">{{phiReqID}}</th>
                     <td>{{FirstName}} {{LastName}}</td>
-                    <td>{{NicNo}}</td>
                     <td>{{description}}</td>
                     <td>{{status}}</td>
                     <td>
                         <div class="form-check form-switch" onclick='event.stopPropagation()'>
-                            <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
-                                onclick="changeStatus({{phiReqID}})" type="checkbox" role="switch"
+                            <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}} {{#if latest}}
+                                disabled {{/if}} onclick="changeStatus({{phiReqID}},{{id}},{{status}})" type="checkbox" role="switch"
                                 value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
                             <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                         </div>
+                    </td>
+                    <td class="text-center">
+                        <i class="fa fa-eye" aria-hidden="true" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#myModal" req_id={{phiReqID}}></i>
                     </td>
                 </tr>
                 {{/each}}
@@ -67,6 +72,30 @@
         {{user.FirstName}}
     </div>
 
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div id="modal-body" class="modal-body">
+                        <p>Some text in the modal.</p>
+                        <p id="req-id"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/phi-home.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>

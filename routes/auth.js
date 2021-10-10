@@ -13,7 +13,6 @@ router.post('/changestatus', authController.changestatus)
 router.post('/confirm-location', phiAuthController.confirmLocation)
 router.post('/confirm-covidStatus', phiAuthController.confirmCovidRequestStatus)
 
-
 // router.post('/confirm-location', (req, res) => {
 //         console.log(req.body)
 // 	res.status(200);

@@ -39,16 +39,18 @@ exports.login = async (req, res) => {
 
   // 2) Check if user exists && password is correct
   db.start.query('SELECT * FROM users WHERE Email = ?', [email], async (error, results) => {
-    console.log(results);
-    console.log(password);
-    const isMatch = await bcrypt.compare(password, results[0].Password);
-    console.log(isMatch);
-    if (!results || !isMatch) {
+    if (!results || results.length === 0) {
       return res.status(401).render("login", {
         message: 'Incorrect Email or password'
       });
     } else {
       // 3) If everything ok, send token to client
+      const isMatch = await bcrypt.compare(password, results[0].Password);
+      if (!isMatch) {
+        return res.status(401).render("login", {
+          message: 'Incorrect Email or password'
+        });
+      }
       const id = results[0].id;
       const tokenBody = {
         id: results[0].id,
@@ -84,7 +86,7 @@ exports.login = async (req, res) => {
         res.status(200).redirect("/");
       }
       if (results[0].roleID == 4) {
-        res.status(200).redirect("/");
+        res.status(200).redirect("/admin-home");
       }
     }
   });
