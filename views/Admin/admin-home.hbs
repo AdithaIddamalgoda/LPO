@@ -8,6 +8,7 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/83071c6fbc.js" crossorigin="anonymous"></script>
     <title>LPO</title>
 </head>
 
@@ -16,7 +17,7 @@
         <h4>Lockdown Permission Organizer</h4>
         <ul>
             {{!-- <li><a href="/">Home</a></li> --}}
-            <li><a href="/phiHome">Profile</a></li>
+            <li><a onclick="roleRedirect({{user.roleID}});" href="#" id="profile">Profile</a></li>
             <li><a href="/auth/logout">Logout</a></li>
         </ul>
     </nav>
@@ -57,34 +58,40 @@
         <button class="btn my-4" id="menu-btn"><i class="fa fa-bars"></i></button>
         <h1>Bootstrap 5 Sidebar Navigation</h1>
 
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">NIC</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">role</th>
                     <th scope="col">Current status</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each phiView}}
-                <tr onclick="requestHistory({{userID}})" onhover="requestHistory" class="tableHover">
-                    <th scope="row">{{phiReqID}}</th>
+                {{#each adminView}}
+                <tr class="tableHover">
+                    <th scope="row">{{id}}</th>
                     <td>{{FirstName}} {{LastName}}</td>
                     <td>{{NicNo}}</td>
                     <td>{{Address1}}, {{Address2}} {{City}}</td>
-                    <td>{{description}}</td>
-                    <td>{{status}}</td>
+                    <td>{{Email}}</td>
+                    <td>{{roleName}}</td>
+                    <td>{{covid_status_value}}</td>
                     <td>
-                        <div class="form-check form-switch" onclick='event.stopPropagation()'>
+                        <div class = "buttons">
+                            <i class="far fa-edit" onclick = "edit({{id}})" id="edit"></i>
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        {{!-- <div class="form-check form-switch" onclick='event.stopPropagation()'>
                             <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
                                 onclick="changeStatus({{phiReqID}},{{id}},{{status}})" type="checkbox" role="switch"
                                 value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
                             <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                        </div>
+                        </div> --}}
                     </td>
                 </tr>
                 {{/each}}
@@ -95,11 +102,7 @@
             voluptas
             at aut suscipit eos? Sapiente quam culpa aliquam
     </section>
-    {{!-- <h1 id="username" onload="changeUserName()">{{user.FirstName}}</h1> --}}
-    <button id="username" onclick="changeUserName()">{{user.FirstName}}</button>
     h={{user.id}}
-    hi{{phireq.status}}
-    td = {{phiView.[0].Email}}
 
 
     <!-- custom js -->
@@ -113,7 +116,7 @@
         })
     </script>
     <script src="/main.js"></script>
-    <script src="/phi-home.js"></script>
+    <script src="/admin-home.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- bootstrap js -->
     {{!--

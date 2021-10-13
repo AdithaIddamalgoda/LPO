@@ -49,6 +49,9 @@ exports.confirmCovidRequestStatus = async (req, res, next) => {
             if (req.body.status == 1) {
                 db.start.query('UPDATE users SET currentCovidStatus = ? WHERE id = ?', [req.body.currentCovidStatus, req.body.userID]);
             }
+            if (req.body.status == 0) {
+                db.start.query('UPDATE users SET currentCovidStatus = 0 WHERE id = ?', [req.body.userID]);
+            }
             res.status(200);
             res.json({ working: true });
             res.end();

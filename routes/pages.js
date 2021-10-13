@@ -1,6 +1,9 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 const phiController = require('../controllers/phiController');
+const adminController = require('../controllers/adminController')
+const dotenv = require('dotenv');
+
 
 const router = express.Router();
 
@@ -22,7 +25,8 @@ router.get('/profile', authController.isLoggedIn, (req, res) => {
   console.log(req.user);
   if (req.user) {
     res.render('profile', {
-      user: req.user
+      user: req.user,
+      api_key: process.env.API_KEY,
     });
   } else {
     res.redirect("/login");
@@ -38,9 +42,10 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-router.get('/admin-home', authController.isLoggedIn, authController.isLogged, authController.phiView, (req, res) => {
+router.get('/admin-home', authController.isLoggedIn, adminController.adminView, (req, res) => {
   res.render('./Admin/admin-home', {
-    user: req.user,
+    user:req.user,
+    adminView: req.adminView,
   });
 });
 router.get('/map', authController.isLoggedIn, authController.isLogged, (req, res) => {
@@ -63,7 +68,7 @@ router.get('/newmap', (req, res) => {
 });
 
 
-router.get('/phiHome', authController.isLoggedIn, authController.isLogged, authController.phiView, (req, res) => {
+router.get('/phiHome', authController.isLoggedIn, authController.isLogged, phiController.phiView, (req, res) => {
   res.render('./PHI/phi-home', {
     user: req.user,
     phireq: req.phireq,
@@ -79,6 +84,5 @@ router.get('/phiHome/:userID', authController.isLoggedIn, authController.isLogge
   });
 });
 
-router.get('/phi-request/:id', phiController.getPhiReqById) 
-
+router.get('/phi-request/:id', phiController.getPhiReqById) //modal
 module.exports = router;
