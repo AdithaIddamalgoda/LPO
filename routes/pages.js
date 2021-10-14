@@ -85,4 +85,7 @@ router.get('/phiHome/:userID', authController.isLoggedIn, authController.isLogge
 });
 
 router.get('/phi-request/:id', phiController.getPhiReqById) //modal
+router.get('/user-edit/:id', adminController.getUserDetails) //modal
+router.get('/user-delete/:id', adminController.deleteUser) //modal
+
 module.exports = router;

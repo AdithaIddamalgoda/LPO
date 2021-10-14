@@ -56,7 +56,7 @@
     <section class="p-4 my-container">
         <button class="btn my-4" id="menu-btn"><i class="bi bi-list"></i></button>
         <h1>Change Covid Status</h1>
-        <form action="./auth/changestatus" method="POST" class="row g-3">
+        <form action="/auth/changestatus" method="POST" class="row g-3" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="covidStatusChange">Status Change</label>
                 <select class="form-control" id="covidStatusChange" , name="covidStatusChange">

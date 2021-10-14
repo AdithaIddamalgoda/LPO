@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const db = require('../model/db');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
+const path = require('path');
+
 
 const getPhiID = async (userID) => {
   return new Promise((resolve, reject) => {
@@ -197,19 +199,17 @@ exports.logout = (req, res) => {
 
 exports.changeStatus = (req, res) => {
 
-
-
   console.log(req.body);
   const decoded = (jwt.verify)(
     req.cookies.jwt,
     process.env.JWT_SECRET
   );
 
-  // const userID = req.body.userID;
-  // req.user = req.user;
   const id = decoded.id;
   const covidStatusChange = req.body.covidStatusChange;
   const statusChangeDesc = req.body.statusChangeDesc;
+  let sampleFile;
+  let uploadPath;
 
   db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id }, (error, result) => {
     if (error) {
@@ -218,10 +218,20 @@ exports.changeStatus = (req, res) => {
     }
     else {
       console.log("hi" + jwt)
-      res.status(200).render("changestatus", {
-         message: "success",
-         user:{ id:id},
-        });
+      sampleFile = req.files.formFile;
+      uploadPath = path.join(__dirname, "../uploads/", sampleFile.name);
+      console.log(sampleFile);
+      sampleFile.mv(uploadPath, function (err) {
+        if (err) {
+          res.status(400).send(err)
+        } else {
+          res.status(200).render("changestatus", {
+            message: "success",
+            user: { id: id },
+          });
+        }
+      })
+
       // res.send("Form Submitted");
     }
   });
