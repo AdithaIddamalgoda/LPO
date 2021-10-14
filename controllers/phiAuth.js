@@ -24,7 +24,10 @@ exports.confirmLocation = async (req, res, next) => {
                         working: "error:\n" + error
                     });
                     res.end();
-
+                } else {
+                    res.status(200);
+                    res.json({ working: true });
+                    res.end();
                 }
             });
         } catch (err) {
@@ -45,7 +48,7 @@ exports.confirmCovidRequestStatus = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             db.start.query('UPDATE phirequests SET covidRequestStatus = ? WHERE phiReqID = ?', [req.body.status, req.body.reqID]);
-                        
+
             if (req.body.status == 1) {
                 db.start.query('UPDATE users SET currentCovidStatus = ? WHERE id = ?', [req.body.currentCovidStatus, req.body.userID]);
             }

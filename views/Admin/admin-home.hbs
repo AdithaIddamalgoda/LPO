@@ -82,8 +82,8 @@
                     <td>{{roleName}}</td>
                     <td>{{covid_status_value}}</td>
                     <td>
-                        <div class = "buttons">
-                            <i class="far fa-edit" onclick = "edit({{id}})" id="edit"></i>
+                        <div class="buttons">
+                            <i class="far fa-edit" id="edit" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" data-req-id={{phiReqID}}></i>
                             <i class="fas fa-trash-alt"></i>
                         </div>
                         {{!-- <div class="form-check form-switch" onclick='event.stopPropagation()'>
@@ -103,7 +103,28 @@
             at aut suscipit eos? Sapiente quam culpa aliquam
     </section>
     h={{user.id}}
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div id="modal-body" class="modal-body">
+                        <p>Some text in the modal.</p>
+                        <p id="req-id"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!-- custom js -->
     <script>

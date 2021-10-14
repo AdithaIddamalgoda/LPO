@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 {{#each phiUserHistory}}
-                <tr onclick="modalPopup({{userID}})" onhover="requestHistory" class="tableHover">
+                <tr onclick="modalPopup({{userID}})" class="tableHover">
                     <th scope="row">{{phiReqID}}</th>
                     <td>{{FirstName}} {{LastName}}</td>
                     <td>{{description}}</td>
@@ -56,14 +56,14 @@
                     <td>
                         <div class="form-check form-switch" onclick='event.stopPropagation()'>
                             <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}} {{#if latest}}
-                                disabled {{/if}} onclick="changeStatus({{phiReqID}},{{id}},{{status}})" type="checkbox" role="switch"
-                                value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
+                                disabled {{/if}} onclick="changeStatus({{phiReqID}},{{id}},{{status}})" type="checkbox"
+                                role="switch" value={{covidRequestStatus}} id="flexSwitchCheckChecked{{phiReqID}}">
                             <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                         </div>
                     </td>
                     <td class="text-center">
-                        <i class="fa fa-eye" aria-hidden="true" class="btn btn-info btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#myModal" req_id={{phiReqID}}></i>
+                        <i class="fa fa-eye" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#myModal" data-req-id={{phiReqID}}></i>
                     </td>
                 </tr>
                 {{/each}}
@@ -94,7 +94,7 @@
         </div>
 
     </div>
-    <script src="/phi-home.js"></script>
+    <script src="/userRequestHistory.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

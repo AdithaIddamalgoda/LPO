@@ -195,7 +195,7 @@ exports.logout = (req, res) => {
 };
 
 
-exports.changestatus = (req, res) => {
+exports.changeStatus = (req, res) => {
 
 
 
@@ -219,7 +219,10 @@ exports.changestatus = (req, res) => {
     }
     else {
       console.log("hi" + jwt)
-      res.status(200).redirect("/changestatus");
+      res.status(200).render("changestatus", {
+         message: "success",
+         user:{ id:id},
+        });
       // res.send("Form Submitted");
     }
   });

@@ -89,3 +89,19 @@ function createOption(ddl, text, value) {
 
 
 // Side Navbar
+
+function roleRedirect(role) {
+  let profile = document.getElementById("profile");
+  if (role==1) {
+    profile.href = "/profile";
+  }
+  if (role == 2) {
+    profile.href = "/phiHome"
+  }
+  if (role == 3) {
+    profile.href = "/policeHome"
+  }
+  if (role == 4) {
+    profile.href = "/admin-home"
+  }
+}

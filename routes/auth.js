@@ -9,7 +9,7 @@ router.post('/register', authController.register);
 
 router.get('/logout', authController.logout);
 
-router.post('/changestatus', authController.changestatus)
+router.post('/changestatus', authController.changeStatus)
 router.post('/confirm-location', phiAuthController.confirmLocation)
 router.post('/confirm-covidStatus', phiAuthController.confirmCovidRequestStatus)
 

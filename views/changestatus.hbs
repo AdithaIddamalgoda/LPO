@@ -21,7 +21,7 @@
         <h4>Lockdown Permission Organizer</h4>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a onclick="roleRedirect({{user.roleID}});" href="#" id="profile">Profile</a></li>
+            <li><a onclick="roleRedirect({{user.roleID}})" href="#" id="profile">Profile</a></li>
             <li><a href="/auth/logout">Logout</a></li>
         </ul>
     </nav>
@@ -89,6 +89,10 @@
     hi {{user.id}}
     RequestStatus{{phireq.status}}
     PhiReqID{{phireq.phiReqID}}
+
+    {{#if message}}
+    <h4 class="alert alert-success mt-4">{{message}}</h4>
+    {{/if}}
 
 
 
