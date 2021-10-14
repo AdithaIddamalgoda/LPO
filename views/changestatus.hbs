@@ -75,14 +75,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Attach Image of PCR Report</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="exampeFormControlFile1"
-                    , accept="image/*">
+                <label for="formFile" class="form-label">Attach Image of PCR Report</label>
+                <input class="form-control" type="file" id="formFile" name="formFile">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            <input type="hidden" id="userID" name="userID" value="{{user.id}}">
+            {{!-- <input type="hidden" id="userID" name="userID" value="{{user.id}}"> --}}
         </form>
     </section>
     </div>

@@ -29,18 +29,27 @@ function changeStatus(reqID, userID, currentCovidStatus) {
         })
 }
 
-function test() {
-    let test = document.getElementById('test');
-    index = test.parentElement;
-    console.log(index.parentElement.rowindex);
-}
 
 document.getElementById('myModal').addEventListener("show.bs.modal", function (event) {
-    let reqId = event.relatedTarget.getAttribute('data-req-id');
-    console.log(reqId);
-    document.getElementById('req-id').innerHTML = reqId
+    let userID = event.relatedTarget.getAttribute('data-user-id');
+    console.log(userID);
+    document.getElementById('req-id').innerHTML = userID
 
-    // axios.get(`/phi-request/${reqId}`).then(response => {
-    //     console.log(response)
-    // })
+    axios.get(`/user-edit/${userID}`).then(response => {
+        console.log(response.data)
+    })
+});
+
+
+document.getElementById('deleteModal').addEventListener("show.bs.modal", function (event) {
+    let userID = event.relatedTarget.getAttribute('data-user-id');
+    console.log(userID);
+    document.getElementById('req-id').innerHTML = userID
+    document.getElementById('confirmDelete').addEventListener("click", () => {
+        axios.get(`/user-delete/${userID}`).then(response => {
+            console.log(response)
+            location.href = ("/admin-home")
+        })
+
+    })
 });

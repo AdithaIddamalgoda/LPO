@@ -83,8 +83,8 @@
                     <td>{{covid_status_value}}</td>
                     <td>
                         <div class="buttons">
-                            <i class="far fa-edit" id="edit" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" data-req-id={{phiReqID}}></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <i class="far fa-edit" id="edit" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" data-user-id={{id}}></i>
+                            <i class="fas fa-trash-alt" id="delete" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user-id={{id}}></i>
                         </div>
                         {{!-- <div class="form-check form-switch" onclick='event.stopPropagation()'>
                             <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
@@ -103,28 +103,43 @@
             at aut suscipit eos? Sapiente quam culpa aliquam
     </section>
     h={{user.id}}
-    <div class="container">
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div id="modal-body" class="modal-body">
-                        <p>Some text in the modal.</p>
-                        <p id="req-id"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                    </div>
+    <div class="modal" tabindex="-1" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Message</p>
+                    <p id="req-id">Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
-
     </div>
+
+        <div class="modal" tabindex="-1" id="deleteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure you want to delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Message</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="confirmDelete">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- custom js -->
     <script>

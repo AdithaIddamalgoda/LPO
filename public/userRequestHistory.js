@@ -35,10 +35,12 @@ document.getElementById('myModal').addEventListener("show.bs.modal", function (e
     document.getElementById('req-id').innerHTML = reqId
 
     axios.get(`/phi-request/${reqId}`).then(response => {
-        console.log(response)
+        console.log(response.data)
+    // document.getElementById('req-id').innerHTML = response.data.status;
     })
 });
 
+//redirect to page when the table row is clicked
 function requestHistory(id) {
     location.href = `/phiHome/${id}`;
 }
