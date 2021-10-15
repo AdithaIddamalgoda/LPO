@@ -36,7 +36,9 @@ document.getElementById('myModal').addEventListener("show.bs.modal", function (e
 
     axios.get(`/phi-request/${reqId}`).then(response => {
         console.log(response.data)
-    // document.getElementById('req-id').innerHTML = response.data.status;
+    document.getElementById('req-id').innerHTML = response.data.status;
+    document.getElementById("pcrImage").src = "../../uploads/"+response.data.pcr_image;
+
     })
 });
 

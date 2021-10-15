@@ -2,7 +2,6 @@ const express = require('express');
 const authController = require('../controllers/auth');
 const phiController = require('../controllers/phiController');
 const adminController = require('../controllers/adminController')
-const dotenv = require('dotenv');
 
 
 const router = express.Router();
@@ -87,5 +86,9 @@ router.get('/phiHome/:userID', authController.isLoggedIn, authController.isLogge
 router.get('/phi-request/:id', phiController.getPhiReqById) //modal
 router.get('/user-edit/:id', adminController.getUserDetails) //modal
 router.get('/user-delete/:id', adminController.deleteUser) //modal
+
+router.get('/test', (req, res) => {
+  res.render('test');
+});
 
 module.exports = router;

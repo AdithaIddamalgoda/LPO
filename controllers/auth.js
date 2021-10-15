@@ -206,35 +206,51 @@ exports.changeStatus = (req, res) => {
   );
 
   const id = decoded.id;
+  let role;
+  if (decoded.roleID) {
+    role = decoded.roleID;
+  } else {
+    role = 1;
+  }
   const covidStatusChange = req.body.covidStatusChange;
   const statusChangeDesc = req.body.statusChangeDesc;
   let sampleFile;
   let uploadPath;
 
-  db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id }, (error, result) => {
-    if (error) {
-      console.log(error)
-      res.status(400)
-    }
-    else {
-      console.log("hi" + jwt)
-      sampleFile = req.files.formFile;
-      uploadPath = path.join(__dirname, "../uploads/", sampleFile.name);
-      console.log(sampleFile);
-      sampleFile.mv(uploadPath, function (err) {
-        if (err) {
-          res.status(400).send(err)
-        } else {
-          res.status(200).render("changestatus", {
-            message: "success",
-            user: { id: id },
-          });
-        }
-      })
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  } else {
+    sampleFile = req.files.formFile;
+    uploadPath = path.join(__dirname, "../uploads/", sampleFile.name);
+    db.start.query('INSERT INTO phiRequests SET ?', { status: covidStatusChange, description: statusChangeDesc, userID: id, pcr_image: sampleFile.name }, (error, result) => {
+      if (error) {
+        console.log(error)
+        res.status(400)
+      }
+      else {
+        console.log("hi" + jwt)
 
-      // res.send("Form Submitted");
-    }
-  });
+        console.log(sampleFile);
+        sampleFile.mv(uploadPath, function (err) {
+          if (err) {
+            res.status(400).send(err)
+          } else {
+            res.status(200).render("changestatus", {
+              message: "success",
+              user: {
+                id: id,
+                roleID: role,
+              },
+
+            });
+          }
+        })
+
+        // res.send("Form Submitted");
+      }
+    });
+  }
+
 
 };
 

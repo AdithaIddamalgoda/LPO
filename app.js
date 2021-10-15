@@ -20,8 +20,10 @@ app.use(fileUpload());
 app.set('view engine', 'hbs');
 
 const publicDirectoryPath = path.join(__dirname, "./public");
-console.log(publicDirectoryPath)
+const uploadsDirectoryPath = path.join(__dirname, "./uploads");
+
 app.use(express.static(publicDirectoryPath));
+app.use("/uploads",express.static(uploadsDirectoryPath));
 
 db.start.connect(function(err) {
   if(err) {
@@ -36,5 +38,6 @@ app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 
 app.listen(5020, () => {
+  console.log(uploadsDirectoryPath)
   console.log("listening on port 5020");
 })
