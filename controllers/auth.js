@@ -79,7 +79,7 @@ exports.login = async (req, res) => {
       };
       res.cookie('jwt', token, cookieOptions);
       if (results[0].roleID == 1) {
-        res.status(200).redirect("/");
+        res.status(200).redirect("/profile");
       }
       if (results[0].roleID == 2) {
         res.status(200).redirect("/phiHome");

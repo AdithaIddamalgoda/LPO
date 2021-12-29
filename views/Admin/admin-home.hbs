@@ -83,8 +83,13 @@
                     <td>{{covid_status_value}}</td>
                     <td>
                         <div class="buttons">
-                            <i class="far fa-edit" id="edit" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" data-user-id={{id}}></i>
+                            {{!-- <i class="far fa-edit" id="edit" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" data-user-id={{id}}></i> --}}
+                            <i class="far fa-edit" onclick="adminEdit({{id}},{{admin.roleID}})" id="edit" aria-hidden="true" data-user-id={{id}}></i>
+
                             <i class="fas fa-trash-alt" id="delete" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user-id={{id}}></i>
+
+                            <i <i class="fas fa-angle-double-up" id="delete" aria-hidden="true"   data-user-id={{id}}></i>
+
                         </div>
                         {{!-- <div class="form-check form-switch" onclick='event.stopPropagation()'>
                             <input class="form-check-input" {{#if covidRequestStatus}} checked {{/if}}
@@ -102,7 +107,7 @@
             voluptas
             at aut suscipit eos? Sapiente quam culpa aliquam
     </section>
-    h={{user.id}}
+    {{!-- h={{user.id}} --}}
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -129,9 +134,9 @@
                     <h5 class="modal-title">Are you sure you want to delete</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                {{!-- <div class="modal-body">
                     <p>Message</p>
-                </div>
+                </div> --}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="confirmDelete">Confirm</button>

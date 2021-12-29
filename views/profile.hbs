@@ -12,7 +12,7 @@
   <nav>
     <h4>Lockdown Permission Organizer</h4>
     <ul>
-      <li><a href="/">Home</a></li>
+      <li><a href="/profile">Home</a></li>
       <li><a href="/profile">Profile</a></li>
       <li><a href="/auth/logout">Logout</a></li>
     </ul>
@@ -57,12 +57,14 @@
         {{!-- <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam facilis inventore harum, architecto libero recusandae porro doloremque sunt cum consectetur, autem, vitae ea nihil sapiente voluptas at aut suscipit eos? Sapiente quam culpa aliquam --}}
     </section>
     {{!-- <h1 id="username" onload="changeUserName()">{{user.FirstName}}</h1> --}}
-    <button id="username" onclick="changeUserName()">{{user.FirstName}}</button>
+    {{!-- <button id="username" onclick="changeUserName()">{{user.FirstName}}</button>
 h={{user.id}}
   hi{{phireq.status}}
-location{{user.location}}
-<p type="hidden" id="locationX" >{{user.location.x}}</p>
-<p type="hidden" id="locationY" >{{user.location.y}}</p>
+location{{user.location}} --}}
+<button id="confirmLocation" onclick="confirmLocation({{user.id}})">confirm location</button>
+<button id="log db location" onload="logDatabaseLocation({{user.id}})">log location</button>
+<p hidden id="locationX" >{{user.location.x}}</p>
+<p hidden id="locationY" >{{user.location.y}}</p>
 
     
 <!-- custom js -->
@@ -77,6 +79,7 @@ location{{user.location}}
 </script>
 <script src = "/main.js"></script>
 <script src = "/map.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- bootstrap js -->
 {{!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> --}}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>

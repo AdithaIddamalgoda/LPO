@@ -1,6 +1,8 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 const phiAuthController = require('../controllers/phiAuth');
+const adminController = require('../controllers/adminController');
+
 
 const router = express.Router();
 
@@ -12,6 +14,9 @@ router.get('/logout', authController.logout);
 router.post('/changestatus', authController.changeStatus)
 router.post('/confirm-location', phiAuthController.confirmLocation)
 router.post('/confirm-covidStatus', phiAuthController.confirmCovidRequestStatus)
+
+router.post('/admin-update', adminController.adminUpdate)
+
 
 // router.post('/confirm-location', (req, res) => {
 //         console.log(req.body)

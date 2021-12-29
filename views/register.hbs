@@ -1,257 +1,206 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/style.css" />
-    <title>LPO</title>
-    <style>
-      .divider:after, .divider:before { content: ""; flex: 1; height: 1px;
-      background: #eee; } .h-custom { height: calc(100% - 73px); } @media
-      (max-width: 450px) { .h-custom { height: 100%; } }
-    </style>
-  </head>
-  <body>
 
-    <section class="vh-100">
-      <div class="container-fluid h-custom">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-md-12 col-lg-2 col-xl-5">
-            <img
-              src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png"
-              class="img-fluid"
-              alt="Sample image"
-            />
-          </div>
-          <div class="col-md-6 col-lg-8 col-xl-6 offset-xl-1 px-5">
-            <div class="p-5">
-              <form action="./auth/register" method="POST">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/style.css" />
+  <title>LPO</title>
+  <style>
+    .divider:after,
+    .divider:before {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #eee;
+    }
 
-                <h2 class="pb-4">Welcome to Lockdown Permission Organizer</h2>
+    .h-custom {
+      height: calc(100% - 73px);
+    }
 
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        class="form-control"
-                        placeholder="Enter First Name Here"
-                      />
+    @media (max-width: 450px) {
+      .h-custom {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
 
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        class="form-control"
-                        placeholder="Enter Last Name Here"
-                      />
+<body>
 
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="form-control"
-                        placeholder="Enter Email Here"
-                      />
-                    </div>
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-lg-2 col-xl-5">
+          <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid"
+            alt="Sample image" />
+        </div>
+        <div class="col-md-6 col-lg-8 col-xl-6 offset-xl-1 px-5">
+          <div class="p-5">
+            <form action="./auth/register" method="POST">
+
+              <h2 class="pb-4">Welcome to Lockdown Permission Organizer</h2>
+
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="firstName" name="firstName" class="form-control"
+                      placeholder="Enter First Name Here" />
+
                   </div>
                 </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="lastName" class="form-control"
+                      placeholder="Enter Last Name Here" />
 
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        placeholder="Enter Password Here"
-                      />
-
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        class="form-control"
-                        placeholder="Re Enter Password Here"
-                      />
-
-                    </div>
                   </div>
                 </div>
-
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        id="inputAddress1"
-                        name="inputAddress1"
-                        class="form-control"
-                        placeholder="Enter Address Line 01 Here"
-                      />
-
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        id="inputAddress2"
-                        name="inputAddress2"
-                        class="form-control"
-                        placeholder="Enter Address Line 02 Here"
-                      />
-
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        id="inputZip"
-                        name="inputZip"
-                        class="form-control"
-                        placeholder="Enter Zip Here"
-                      />
-
-                    </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email Here" />
                   </div>
                 </div>
+              </div>
 
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline">
-                      <select
-                        id="inputProvince"
-                        class="form-select"
-                        name="inputProvince"
-                        onchange="configureDropDownLists(this,document.getElementById('inputDistrict'))"
-                      >
-                        <option value="" selected disabled>Choose Province Here</option>
-                        <option value="Northern">Northern</option>
-                        <option value="North Western">North Western</option>
-                        <option value="Western">Western</option>
-                        <option value="North Central">North Central</option>
-                        <option value="Central">Central</option>
-                        <option value="Sabaragamuwa">Sabaragamuwa</option>
-                        <option value="Eastern">Eastern</option>
-                        <option value="Uva">Uva</option>
-                        <option value="Southern">Southern</option>
-                      </select>
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="password" id="password" name="password" class="form-control"
+                      placeholder="Enter Password Here" />
 
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <select
-                        id="inputDistrict"
-                        class="form-select"
-                        name="inputDistrict"
-                      >
-                        <option selected disabled>Choose District</option>
-                        <option>...</option>
-                      </select>
-
-                    </div>
                   </div>
                 </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                      placeholder="Re Enter Password Here" />
 
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="inputCity"
-                        name="inputCity"
-                        placeholder="Enter City Name"
-                      />
-
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="inputNic"
-                        name="inputNic"
-                        placeholder="Enter NIC No Here"
-                      />
-
-                    </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="text-center text-lg-start mt-4 pt-2">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;"
-                  >Register</button>
-                  <p class="small fw-bold mt-2 pt-1 mb-0">Have an account?
-                    <a href="/login" class="link-danger">Login</a></p>
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="inputAddress1" name="inputAddress1" class="form-control"
+                      placeholder="Enter Address Line 1" />
+
+                  </div>
                 </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="inputAddress2" name="inputAddress2" class="form-control"
+                      placeholder="Enter Address Line 2" />
 
-              </form>
-            </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="inputZip" name="inputZip" class="form-control"
+                      placeholder="Enter Zip Here" />
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <select id="inputProvince" class="form-select" name="inputProvince"
+                      onchange="configureDropDownLists(this,document.getElementById('inputDistrict'))">
+                      <option value="" selected disabled>Choose Province Here</option>
+                      <option value="Northern">Northern</option>
+                      <option value="North Western">North Western</option>
+                      <option value="Western">Western</option>
+                      <option value="North Central">North Central</option>
+                      <option value="Central">Central</option>
+                      <option value="Sabaragamuwa">Sabaragamuwa</option>
+                      <option value="Eastern">Eastern</option>
+                      <option value="Uva">Uva</option>
+                      <option value="Southern">Southern</option>
+                    </select>
+
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <select id="inputDistrict" class="form-select" name="inputDistrict">
+                      <option selected disabled>Choose District</option>
+                      <option>...</option>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" class="form-control" id="inputCity" name="inputCity"
+                      placeholder="Enter City Name" />
+
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" class="form-control" id="inputNic" name="inputNic"
+                      placeholder="Enter NIC No Here" />
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center text-lg-start mt-4 pt-2">
+                <button type="submit" class="btn btn-primary btn-lg"
+                  style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Have an account?
+                  <a href="/login" class="link-danger">Login</a>
+                </p>
+              </div>
+
+            </form>
           </div>
         </div>
       </div>
-      <div
-        class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary"
-      >
-        <!-- Copyright -->
-        <div class="text-white mb-3 mb-md-0">
-          Copyright © 2021. Lockdown Permission Organizor.
-        </div>
-        <!-- Copyright -->
-
-        <!-- Right -->
-        <div>
-          <a href="#!" class="text-white me-4">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#!" class="text-white me-4">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#!" class="text-white me-4">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="#!" class="text-white">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
-        <!-- Right -->
+    </div>
+    {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+    <div
+      class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+      <!-- Copyright -->
+      <div class="text-white mb-3 mb-md-0">
+        Copyright © 2021. Lockdown Permission Organizer.
       </div>
-    </section>
+      <!-- Copyright -->
 
-    <script src="/main.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+      <!-- Right -->
+      <div>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="#!" class="text-white">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </div>
+  </section>
+
+  <script src="/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

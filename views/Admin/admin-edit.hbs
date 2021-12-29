@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/83071c6fbc.js" crossorigin="anonymous"></script>
+    <title>LPO</title>
+</head>
+
+<body>
+    <nav>
+        <h4>Lockdown Permission Organizer</h4>
+        <ul>
+            {{!-- <li><a href="/">Home</a></li> --}}
+            <li><a onclick="roleRedirect({{user.roleID}});" href="#" id="profile">Profile</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </nav>
+    {{!-- <div class="container mt-4">
+        <h1>Welcome {{user.FirstName}}</h1>
+    </div> --}}
+
+
+    <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+        <a href="#" class="navbar-brand text-light mt-5">
+            <div class="display-5 font-weight-bold" id="welcome_message">{{user.FirstName}}</div>
+        </a>
+        <ul class="navbar-nav d-flex flex-column mt-5 w-100">
+            <li class="nav-item w-100">
+                <a href="/changestatus" class="nav-link text-light pl-4">Change Status</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="#" class="nav-link text-light pl-4">Manage Status Requests</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="#" class="nav-link text-light pl-4">Create Permission</a>
+            </li>
+            <li class="nav-item dropdown w-100">
+                <a href="#" class="nav-link dropdown-toggle text-light pl-4" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-expanded="false">Service</a>
+                <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
+                    <li><a href="#" class="dropdown-item text-light pl-4 p-2">Service 01</a></li>
+                    <li><a href="#" class="dropdown-item text-light pl-4 p-2">Service 02</a></li>
+                    <li><a href="#" class="dropdown-item text-light pl-4 p-2">Service 03</a></li>
+                </ul>
+            </li>
+            <li class="nav-item w-100">
+                <a href="#" class="nav-link text-light pl-4">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">Registration Form
+            </div>
+            <div class="card-body">
+                <form action="/auth/admin-update" method="POST" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName"
+                            value={{admin.FirstName}}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" value={{admin.LastName}}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value={{admin.Email}}>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress1" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="inputAddress1"
+                            name="inputAddress1" value={{admin.Address1}}>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="inputAddress2" 
+                            name="inputAddress2" value={{admin.Address2}}>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputCity" class="form-label">City</label>
+                        <input type="text" class="form-control" id="inputCity" name="inputCity" value={{admin.City}}>
+                    </div>
+                    {{!-- <div class="col-md-4">
+                        <label for="inputProvince" class="form-label">Province</label>
+                        <select id="inputProvince" class="form-select" name="inputProvince" onchange="configureDropDownLists(this,document.getElementById('inputDistrict'))" value={{admin.Province}}>
+                        <option value=""></option>
+                        <option value="Northern">Northern</option>
+                        <option value="North Western">North Western</option>
+                        <option value="Western">Western</option>
+                        <option value="North Central">North Central</option>
+                        <option value="Central">Central</option>
+                        <option value="Sabaragamuwa">Sabaragamuwa</option>
+                        <option value="Eastern">Eastern</option>
+                        <option value="Uva">Uva</option>
+                        <option value="Southern">Southern</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputDistrict" class="form-label">District</label>                        
+                        <select id="inputDistrict" class="form-select" name="inputDistrict" value={{admin.District}}>
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                        </select>
+                    </div> --}}
+                    <div class="col-md-3">
+                        <label for="inputZip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="inputZip" name="inputZip" value={{admin.Zip}}>
+                    </div>
+                    <div class="col-4">
+                        <label for="inputNic" class="form-label">NIC No.</label>
+                        <input type="text" class="form-control" id="inputNic" name="inputNic" value={{admin.NicNo}}>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                    <input type="hidden" class="form-control" id="userId" name="userId" value={{admin.id}}>
+                </form>
+            </div>
+        </div>
+        {{!-- <p>hjsoadi{{admin.id}}</p> --}}
+
+
+        <script src="/main.js"></script>
+        {{!--
+        <script src="/admin-home.js"></script> --}}
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!-- bootstrap js -->
+        {{!--
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script> --}}
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"
+            integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>

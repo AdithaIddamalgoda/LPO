@@ -29,6 +29,37 @@ function changeStatus(reqID, userID, currentCovidStatus) {
         })
 }
 
+function adminEdit(id,role) {
+    if (role==1) {
+        location.href = `/Edits/user-edit/${id}`;
+      }
+      if (role == 2) {
+        location.href = `/Edits/phi-edit/${id}`;
+      }
+      if (role == 3) {
+        location.href = `/Edits/police-edit/${id}`;
+      }
+      if (role == 4) {
+        location.href = `/Edits/admin-edit/${id}`;
+      }
+    
+
+}
+function roleRedirect(role) {
+    let profile = document.getElementById("profile");
+    if (role==1) {
+      profile.href = "/profile";
+    }
+    if (role == 2) {
+      profile.href = "/phiHome"
+    }
+    if (role == 3) {
+      profile.href = "/policeHome"
+    }
+    if (role == 4) {
+      profile.href = "/admin-home"
+    }
+  }
 
 document.getElementById('myModal').addEventListener("show.bs.modal", function (event) {
     let userID = event.relatedTarget.getAttribute('data-user-id');

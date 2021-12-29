@@ -14,7 +14,7 @@ const router = express.Router();
 router.get('/', authController.isLoggedIn, (req, res) => {
   console.log("inside");
   console.log(req.user);
-  res.render('index', {
+  res.render('login', {
     user: req.user
   });
 });
@@ -81,6 +81,23 @@ router.get('/phiHome/:userID', authController.isLoggedIn, authController.isLogge
     phireq: req.phireq,
     phiUserHistory: req.phiUserHistory,
   });
+});
+
+router.get('/admin-edit/:id', authController.isLoggedIn, adminController.adminEditView, (req, res) => {
+  // console.log("ehruoahora", req.user)
+  res.render('./Admin/user-edit', {
+    user: req.user,
+    admin: req.admin,
+  });
+  console.log("ehruoahora", req.user)
+});
+router.get('/admin-edit/:id', authController.isLoggedIn, adminController.adminEditView, (req, res) => {
+  // console.log("ehruoahora", req.user)
+  res.render('./Admin/phi-edit', {
+    user: req.user,
+    admin: req.admin,
+  });
+  console.log("ehruoahora", req.user)
 });
 
 router.get('/phi-request/:id', phiController.getPhiReqById) //modal
